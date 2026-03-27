@@ -31,3 +31,9 @@ else:
 cat_cols = df.select_dtypes(include=['object', 'string']).columns.tolist()
 print(f'Colonne categoriche ({len(cat_cols)}): {cat_cols}')
 
+from sklearn.preprocessing import MinMaxScaler
+num_cols = df.select_dtypes(include='number').columns.tolist()
+df_scaled = pd.DataFrame(
+    MinMaxScaler().fit_transform(df[num_cols].dropna()),
+    columns=num_cols
+)
